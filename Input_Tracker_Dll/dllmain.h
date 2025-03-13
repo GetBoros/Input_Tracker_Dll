@@ -19,12 +19,16 @@ struct SHUD_Settings
 class DLL_API ATemplate  // Interface api
 {
 public:
+	~ATemplate();
 	ATemplate();
 
 	int Init();
 	wchar_t *Handle_Clipboard();
 	void Enable_Hook(bool is_enable);
-	void Get_XY_Cords(int &x, int &y);
+	void Get_XY_Cords(int **ptr_x, int **ptr_y);
+
+	int *Temp_Array_Ptr;
+	int *Arra_Cords;
 };
 //------------------------------------------------------------------------------------------------------------
 

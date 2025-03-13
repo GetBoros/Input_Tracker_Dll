@@ -10,20 +10,35 @@ import <Windows.h>;
 
 
 //------------------------------------------------------------------------------------------------------------
-HHOOK g_MouseHook = nullptr;
+HHOOK g_MouseHook = 0;
 //------------------------------------------------------------------------------------------------------------
 static LRESULT CALLBACK MouseHookProc(int nCode, WPARAM wParam, LPARAM lParam)
 {// Обработчик хука
+   int yy = 0, temp = 0;
 
    if (nCode >= 0)
    {
-      if (wParam == WM_LBUTTONDOWN)
-      {// Обработка клика левой кнопкой мыши
+      if (wParam == WM_LBUTTONDOWN)  // Save mouse cords
+      {
+         if (!AsTools::Array_X_Cords)
+         {
+            AsTools::Array_X_Cords = new int[5] {};  // !!! free mem
+            AsTools::Ptr_X_Cords = AsTools::Array_X_Cords;
+            AsTools::Array_Y_Cords = new int[5] {};  // !!! free mem
+            AsTools::Ptr_Y_Cords = AsTools::Array_Y_Cords;
+         }
+
+         MSLLHOOKSTRUCT *mouse_struct = 0;
          
-         MSLLHOOKSTRUCT *mouse_struct = (MSLLHOOKSTRUCT *)lParam;
-         AsTools::X_Cord = mouse_struct->pt.x;
-         AsTools::Y_Cord = mouse_struct->pt.y;
-         OutputDebugString(L"Left mouse button clicked outside the window!\n");
+         mouse_struct = (MSLLHOOKSTRUCT *)lParam;
+
+         // !!! 1.0. Save X_Cord | Need check if not < 5
+         *AsTools::Ptr_X_Cords = mouse_struct->pt.x;
+         AsTools::Ptr_X_Cords++;
+
+         // 1.1. Save Y_Cord
+         *AsTools::Ptr_Y_Cords = mouse_struct->pt.y;
+         AsTools::Ptr_Y_Cords++;
       }
    }
    return CallNextHookEx(g_MouseHook, nCode, wParam, lParam);
@@ -54,10 +69,17 @@ void RemoveGlobalMouseHook()
 
 
 // AsTools
-int AsTools::X_Cord = 0;
-int AsTools::Y_Cord = 0;
+int *AsTools::Ptr_X_Cords = 0;
+int *AsTools::Ptr_Y_Cords = 0;
+int *AsTools::Array_X_Cords = 0;
+int *AsTools::Array_Y_Cords = 0;
 //------------------------------------------------------------------------------------------------------------
 AsTools::~AsTools()
+{
+
+}
+//------------------------------------------------------------------------------------------------------------
+AsTools::AsTools()
 {
 
 }
@@ -70,11 +92,6 @@ void AsTools::Enable_Hook()
 void AsTools::Disable_Hook()
 {
    RemoveGlobalMouseHook();
-}
-//------------------------------------------------------------------------------------------------------------
-AsTools::AsTools()
-{
-
 }
 //------------------------------------------------------------------------------------------------------------
 wchar_t *AsTools::Handle_Clipboard()

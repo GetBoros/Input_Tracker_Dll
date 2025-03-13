@@ -3,10 +3,18 @@
 //------------------------------------------------------------------------------------------------------------
 import Tools;
 
-// ATemplate
-ATemplate::ATemplate()
-{
 
+// ATemplate
+ATemplate::~ATemplate()
+{
+	delete[] Arra_Cords;
+}
+//------------------------------------------------------------------------------------------------------------
+ATemplate::ATemplate()
+ : Temp_Array_Ptr(0)
+{
+	Arra_Cords = new int[10] {};
+	Temp_Array_Ptr = Arra_Cords;
 }
 //------------------------------------------------------------------------------------------------------------
 int ATemplate::Init()
@@ -32,9 +40,9 @@ void ATemplate::Enable_Hook(bool is_enable)
 		tools.Disable_Hook();
 }
 //------------------------------------------------------------------------------------------------------------
-void ATemplate::Get_XY_Cords(int& x, int& y)
+void ATemplate::Get_XY_Cords(int **ptr_x, int **ptr_y)
 {
-	x = AsTools::X_Cord;
-	y = AsTools::Y_Cord;
+	*ptr_x = AsTools::Array_X_Cords;
+	*ptr_y = AsTools::Array_Y_Cords;
 }
 //------------------------------------------------------------------------------------------------------------

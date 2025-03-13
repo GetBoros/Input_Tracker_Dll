@@ -10,13 +10,18 @@ export module Tools;
 export class AsTools
 {
 public:
-	AsTools();
 	~AsTools();
+	AsTools();
 
 	void Enable_Hook();
 	void Disable_Hook();
-	static int X_Cord;
-	static int Y_Cord;
+	
+	// TEMP
+	static int *Ptr_X_Cords;
+	static int *Ptr_Y_Cords;
+	static int *Array_X_Cords;
+	static int *Array_Y_Cords;
+	// TEMP END
 
 	static wchar_t *Handle_Clipboard();
 };
