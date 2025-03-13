@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Dll_Main">
+      <UniqueIdentifier>{1ccc39af-de13-4674-86c0-17fa3d97f54b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dll_Main\Tools">
+      <UniqueIdentifier>{2dd17511-3f46-4eb8-b1ee-35693bfceed8}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="dllmain.cpp">
+      <Filter>Dll_Main</Filter>
+    </ClCompile>
+    <ClCompile Include="Tools.ixx">
+      <Filter>Dll_Main\Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="Tools.cpp">
+      <Filter>Dll_Main\Tools</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="dllmain.h">
+      <Filter>Dll_Main</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

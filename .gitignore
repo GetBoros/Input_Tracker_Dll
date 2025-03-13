@@ -30,3 +30,8 @@
 *.exe
 *.out
 *.app
+
+.vs/
+*.sln
+x64/
+Input_Tracker_Dll/x64/
