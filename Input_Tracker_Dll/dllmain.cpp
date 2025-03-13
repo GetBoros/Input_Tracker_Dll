@@ -23,3 +23,18 @@ wchar_t *ATemplate::Handle_Clipboard()
 	return format_wstring;
 }
 //------------------------------------------------------------------------------------------------------------
+void ATemplate::Enable_Hook(bool is_enable)
+{
+	AsTools tools;
+	if (is_enable)
+		tools.Enable_Hook();
+	else
+		tools.Disable_Hook();
+}
+//------------------------------------------------------------------------------------------------------------
+void ATemplate::Get_XY_Cords(int& x, int& y)
+{
+	x = AsTools::X_Cord;
+	y = AsTools::Y_Cord;
+}
+//------------------------------------------------------------------------------------------------------------

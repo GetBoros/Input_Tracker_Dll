@@ -16,14 +16,15 @@ struct SHUD_Settings
 	wchar_t *Draw_String;
 };
 //------------------------------------------------------------------------------------------------------------
-class DLL_API ATemplate
+class DLL_API ATemplate  // Interface api
 {
 public:
 	ATemplate();
 
 	int Init();
 	wchar_t *Handle_Clipboard();
-
+	void Enable_Hook(bool is_enable);
+	void Get_XY_Cords(int &x, int &y);
 };
 //------------------------------------------------------------------------------------------------------------
 

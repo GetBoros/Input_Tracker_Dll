@@ -5,9 +5,71 @@ module Tools;
 //------------------------------------------------------------------------------------------------------------
 import <Windows.h>;
 //------------------------------------------------------------------------------------------------------------
+
+
+
+
+//------------------------------------------------------------------------------------------------------------
+HHOOK g_MouseHook = nullptr;
+//------------------------------------------------------------------------------------------------------------
+static LRESULT CALLBACK MouseHookProc(int nCode, WPARAM wParam, LPARAM lParam)
+{// Обработчик хука
+
+   if (nCode >= 0)
+   {
+      if (wParam == WM_LBUTTONDOWN)
+      {// Обработка клика левой кнопкой мыши
+         
+         MSLLHOOKSTRUCT *mouse_struct = (MSLLHOOKSTRUCT *)lParam;
+         AsTools::X_Cord = mouse_struct->pt.x;
+         AsTools::Y_Cord = mouse_struct->pt.y;
+         OutputDebugString(L"Left mouse button clicked outside the window!\n");
+      }
+   }
+   return CallNextHookEx(g_MouseHook, nCode, wParam, lParam);
+}
+//------------------------------------------------------------------------------------------------------------
+void SetGlobalMouseHook()
+{// Установка хука
+
+   if (g_MouseHook != 0)
+      return;
+   g_MouseHook = SetWindowsHookEx(WH_MOUSE_LL, MouseHookProc, GetModuleHandle(0), 0);  // afk
+   if (g_MouseHook == nullptr)
+      MessageBox(nullptr, L"Failed to set mouse hook!", L"Error", MB_ICONERROR);
+}
+//------------------------------------------------------------------------------------------------------------
+void RemoveGlobalMouseHook()
+{// Удаление хука
+
+   if (g_MouseHook)
+   {
+      UnhookWindowsHookEx(g_MouseHook);
+      g_MouseHook = nullptr;
+   }
+}
+//------------------------------------------------------------------------------------------------------------
+
+
+
+
+// AsTools
+int AsTools::X_Cord = 0;
+int AsTools::Y_Cord = 0;
+//------------------------------------------------------------------------------------------------------------
 AsTools::~AsTools()
 {
 
+}
+//------------------------------------------------------------------------------------------------------------
+void AsTools::Enable_Hook()
+{
+   SetGlobalMouseHook();
+}
+//------------------------------------------------------------------------------------------------------------
+void AsTools::Disable_Hook()
+{
+   RemoveGlobalMouseHook();
 }
 //------------------------------------------------------------------------------------------------------------
 AsTools::AsTools()
