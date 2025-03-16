@@ -9,59 +9,47 @@ import <Windows.h>;
 
 
 
+// Global
+HHOOK Hook_Mouse = 0;
 //------------------------------------------------------------------------------------------------------------
-HHOOK g_MouseHook = 0;
-//------------------------------------------------------------------------------------------------------------
-static LRESULT CALLBACK MouseHookProc(int nCode, WPARAM wParam, LPARAM lParam)
-{// Обработчик хука
-   int yy = 0, temp = 0;
-
-   if (nCode >= 0)
+static LRESULT CALLBACK Hook_Mouse_Proc(int n_code, WPARAM w_param, LPARAM l_param)
+{
+   if (n_code >= 0)
    {
-      if (wParam == WM_LBUTTONDOWN)  // Save mouse cords
+      if (w_param == WM_LBUTTONDOWN)  // Save mouse cords
       {
+         MSLLHOOKSTRUCT *mouse_struct = (MSLLHOOKSTRUCT *)l_param;
+         
          if (!AsTools::Array_X_Cords)
          {
-            AsTools::Array_X_Cords = new int[5] {};  // !!! free mem
+            AsTools::Array_X_Cords = new int[AsTools::Array_Length] {};
+            AsTools::Array_Y_Cords = new int[AsTools::Array_Length] {};
             AsTools::Ptr_X_Cords = AsTools::Array_X_Cords;
-            AsTools::Array_Y_Cords = new int[5] {};  // !!! free mem
             AsTools::Ptr_Y_Cords = AsTools::Array_Y_Cords;
          }
 
-         MSLLHOOKSTRUCT *mouse_struct = 0;
-         
-         mouse_struct = (MSLLHOOKSTRUCT *)lParam;
-
-         // !!! 1.0. Save X_Cord | Need check if not < 5
          *AsTools::Ptr_X_Cords = mouse_struct->pt.x;
-         AsTools::Ptr_X_Cords++;
-
-         // 1.1. Save Y_Cord
          *AsTools::Ptr_Y_Cords = mouse_struct->pt.y;
+
+         AsTools::Ptr_X_Cords++;
          AsTools::Ptr_Y_Cords++;
       }
    }
-   return CallNextHookEx(g_MouseHook, nCode, wParam, lParam);
+   return CallNextHookEx(Hook_Mouse, n_code, w_param, l_param);
 }
 //------------------------------------------------------------------------------------------------------------
-void SetGlobalMouseHook()
-{// Установка хука
-
-   if (g_MouseHook != 0)
+void Mouse_Hook_Enable()
+{
+   if (Hook_Mouse != 0)
       return;
-   g_MouseHook = SetWindowsHookEx(WH_MOUSE_LL, MouseHookProc, GetModuleHandle(0), 0);  // afk
-   if (g_MouseHook == nullptr)
-      MessageBox(nullptr, L"Failed to set mouse hook!", L"Error", MB_ICONERROR);
+   Hook_Mouse = SetWindowsHookEx(WH_MOUSE_LL, Hook_Mouse_Proc, GetModuleHandle(0), 0);
 }
 //------------------------------------------------------------------------------------------------------------
-void RemoveGlobalMouseHook()
-{// Удаление хука
-
-   if (g_MouseHook)
-   {
-      UnhookWindowsHookEx(g_MouseHook);
-      g_MouseHook = nullptr;
-   }
+void Mouse_Hook_Remove()
+{
+   if (Hook_Mouse)
+      UnhookWindowsHookEx(Hook_Mouse);
+   Hook_Mouse = 0;
 }
 //------------------------------------------------------------------------------------------------------------
 
@@ -84,14 +72,27 @@ AsTools::AsTools()
 
 }
 //------------------------------------------------------------------------------------------------------------
+void AsTools::Throw()
+{
+   return throw 13;
+}
+//------------------------------------------------------------------------------------------------------------
 void AsTools::Enable_Hook()
 {
-   SetGlobalMouseHook();
+   Mouse_Hook_Enable();
 }
 //------------------------------------------------------------------------------------------------------------
 void AsTools::Disable_Hook()
 {
-   RemoveGlobalMouseHook();
+   Mouse_Hook_Remove();
+}
+//------------------------------------------------------------------------------------------------------------
+void AsTools::Array_Clear()
+{
+   delete[] Array_X_Cords;
+   delete[] Array_Y_Cords;
+   Ptr_X_Cords = 0;
+   Ptr_Y_Cords = 0;
 }
 //------------------------------------------------------------------------------------------------------------
 wchar_t *AsTools::Handle_Clipboard()
