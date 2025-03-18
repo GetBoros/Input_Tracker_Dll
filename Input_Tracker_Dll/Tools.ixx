@@ -18,7 +18,8 @@ public:
 	// TEMP || If last click don`t save cords, or if need save |
 	void Enable_Hook();
 	void Disable_Hook();
-	
+	void FFmpeg_Command_Run();
+
 	static void Array_Clear();
 
 	static constexpr int Array_Length = 5;

@@ -4,6 +4,8 @@ module;
 module Tools;
 //------------------------------------------------------------------------------------------------------------
 import <Windows.h>;
+import <iostream>;
+import <array>;
 //------------------------------------------------------------------------------------------------------------
 
 
@@ -85,6 +87,29 @@ void AsTools::Enable_Hook()
 void AsTools::Disable_Hook()
 {
    Mouse_Hook_Remove();
+}
+//------------------------------------------------------------------------------------------------------------
+void AsTools::FFmpeg_Command_Run()
+{
+   constexpr std::wstring_view file_name = L"1.mp4";
+   std::wstring command = L"ffmpeg -i \"" + std::wstring(file_name) + L"\" -frames:v 1 screenshot.png";
+
+   STARTUPINFO si = { sizeof(si) };
+   si.dwFlags = STARTF_USESHOWWINDOW;
+   si.wShowWindow = SW_HIDE; // Скрываем консольное окно ffmpeg
+
+   PROCESS_INFORMATION pi;
+   std::array<wchar_t, 512> cmd {};
+   wcsncpy_s(cmd.data(), cmd.size(), command.c_str(), cmd.size() - 1);
+
+   if ( !(CreateProcessW(0, cmd.data(), 0, 0, false, 0, 0, 0, &si, &pi) == 0) )
+   {
+      CloseHandle(pi.hThread);
+      WaitForSingleObject(pi.hProcess, INFINITE);
+      CloseHandle(pi.hProcess);
+   }
+   else
+      AsTools::Throw();
 }
 //------------------------------------------------------------------------------------------------------------
 void AsTools::Array_Clear()
