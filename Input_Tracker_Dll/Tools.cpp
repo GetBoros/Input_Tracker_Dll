@@ -95,57 +95,57 @@ void AsTools::Disable_Hook()
 //------------------------------------------------------------------------------------------------------------
 void AsTools::FFmpeg_Command_Run(const wchar_t *str)
 {
-   // https://edge11-waw.live.mmcdn.com/live-edge/amlst:re_jeena-sd-c21eb72bf628013d5a6e3599fabd4f66ac03d3ebcdf4264b086b061c886994c9_trns_h264/chunklist_w6517537_b5128000_t64RlBTOjMwLjA=.m3u8
-   const wchar_t *text_chank_lists = Handle_Clipboard();
-   int yy = 0;
-   const wchar_t *file_name_starts = wcsstr(text_chank_lists, L"amlst:") + wcslen(L"amlst:");
-   const wchar_t *file_name_ending = wcsstr(text_chank_lists, L"-sd-");
-   std::wstring_view file_name(file_name_starts, file_name_ending - file_name_starts);
-
-   HANDLE hInputRead = 0;
-   HANDLE hInputWrite = 0;
-   std::wstring check_file (file_name);
-   check_file += +L".mp4";
-   std::filesystem::path file_path = check_file;
-   if (std::filesystem::exists(file_path) )
-      yy++;  // if exist create new name
-  
-   std::wstring command = L"ffmpeg -i \"" + std::wstring(text_chank_lists) + L"\" -c:v libx264 -preset veryfast -crf 23 -c:a aac -b:a 128k " + check_file;
+   wchar_t *text_chank_lists = 0;
+   HANDLE handle_input_read = 0;
+   HANDLE handle_input_write = 0;
+   std::wstring file_name;
+   std::wstring cons_command;
    SECURITY_ATTRIBUTES sa = { sizeof(sa) };
    STARTUPINFO si = { sizeof(si) };
 
-   sa.bInheritHandle = true;
-   CreatePipe(&hInputRead, &hInputWrite, &sa, 0);
+   constexpr int startf_use_show_window = 0x00000001;
+   constexpr int startf_use_std_handles = 0x00000100;
+   constexpr int sw_hide = 0;
+   constexpr int std_output_handle = ( (DWORD) - 11);  // STD_OUTPUT_HANDLE
+   constexpr int std_error_handle = ( (DWORD) - 12);  // STD_ERROR_HANDLE
 
-   si.dwFlags = STARTF_USESHOWWINDOW | STARTF_USESTDHANDLES;
-   si.wShowWindow = SW_HIDE;
-   si.hStdInput = hInputRead;
-   si.hStdOutput = GetStdHandle(STD_OUTPUT_HANDLE);
-   si.hStdError = GetStdHandle(STD_ERROR_HANDLE);
+   text_chank_lists = Handle_Clipboard();
+   Get_File_Unique_Name(text_chank_lists, file_name);
+   cons_command = L"ffmpeg -i \"" + std::wstring(text_chank_lists) + L"\" -c:v libx264 -preset veryfast -crf 23 -c:a aac -b:a 128k " + file_name;
+
+   // Call console command
+   sa.bInheritHandle = true;
+   CreatePipe(&handle_input_read, &handle_input_write, &sa, 0);
+
+   si.dwFlags = startf_use_show_window | startf_use_std_handles;
+   si.wShowWindow = sw_hide;
+   si.hStdInput = handle_input_read;
+   si.hStdOutput = GetStdHandle(std_output_handle);
+   si.hStdError = GetStdHandle(std_error_handle);
 
    PROCESS_INFORMATION pi;
    std::array<wchar_t, 512> cmd{};
 
-   // !!! TASK Get from clipboard wstring | extract name to save | check if doesn`t exist already save | if exist add _00 or _01
-
-   wcsncpy_s(cmd.data(), cmd.size(), command.c_str(), cmd.size() - 1);
+   wcsncpy_s(cmd.data(), cmd.size(), cons_command.c_str(), cmd.size() - 1);
 
    if (CreateProcessW(0, cmd.data(), 0, 0, true, 0, 0, 0, &si, &pi))
    {
       CloseHandle(pi.hThread);  // Close thread handle
-      CloseHandle(hInputRead);  // Close unused read end
+      CloseHandle(handle_input_read);  // Close unused read end
 
       Fmpeg_Process = pi.hProcess;  // Save process handle
-      Fmpeg_Stdin = hInputWrite;  // Save write pipe
+      Fmpeg_Stdin = handle_input_write;  // Save write pipe
 
       std::thread([&pi]() { WaitForSingleObject(pi.hProcess, INFINITE); } ).detach();
    }
    else
    {
-      CloseHandle(hInputRead);
-      CloseHandle(hInputWrite);
+      CloseHandle(handle_input_read);
+      CloseHandle(handle_input_write);
       AsTools::Throw();  // Error handling
    }
+
+   delete[] text_chank_lists;
 }
 //------------------------------------------------------------------------------------------------------------
 void AsTools::FFmpeg_Stop()
@@ -203,5 +203,40 @@ wchar_t *AsTools::Handle_Clipboard()
    CloseClipboard();
 
    return copy_text;
+}
+//------------------------------------------------------------------------------------------------------------
+void AsTools::Get_File_Unique_Name(const wchar_t *text_chank_lists, std::wstring &file_name)
+{
+   int index = 0;
+
+   constexpr wchar_t prefix[] = L"amlst:";
+   constexpr wchar_t suffix[] = L"-sd-";
+   const wchar_t *file_name_starts = 0;
+   const wchar_t *file_name_ending = 0;
+   std::wstring unique_file_name;
+
+   file_name_starts = wcsstr(text_chank_lists, prefix);
+   if (!file_name_starts != 0)
+      return;
+   file_name_starts += wcslen(prefix);
+
+   file_name_ending = wcsstr(text_chank_lists, suffix);
+   if (!file_name_ending != 0)
+      return;
+   
+   file_name.assign(file_name_starts, file_name_ending - file_name_starts);
+
+   do
+   {
+      unique_file_name = file_name + L"_" + (index < 10 ? L"0" : L"") + std::to_wstring(index) + L".mp4";
+      index++;
+   } while (std::filesystem::exists(unique_file_name) );
+
+   file_name = unique_file_name;
+}
+//------------------------------------------------------------------------------------------------------------
+void AsTools::Get_Ffmpeg_Cons_Command()
+{
+
 }
 //------------------------------------------------------------------------------------------------------------
