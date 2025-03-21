@@ -51,9 +51,15 @@ void ATemplate::Reset_Tools()
 	AsTools::Array_Clear();
 }
 //------------------------------------------------------------------------------------------------------------
-void ATemplate::FFmpeg_Command_Run()
+void ATemplate::FFmpeg_Command_Run(const wchar_t *str)
 {
 	AsTools tools;
-	tools.FFmpeg_Command_Run();
+	tools.FFmpeg_Command_Run(str);
+}
+//------------------------------------------------------------------------------------------------------------
+void ATemplate::FFmpeg_Command_Stop()
+{
+	AsTools tools;
+	tools.FFmpeg_Stop();
 }
 //------------------------------------------------------------------------------------------------------------

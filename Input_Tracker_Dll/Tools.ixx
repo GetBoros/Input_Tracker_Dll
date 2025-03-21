@@ -3,6 +3,8 @@ module;
 
 export module Tools;
 //------------------------------------------------------------------------------------------------------------
+import <Windows.h>;
+//------------------------------------------------------------------------------------------------------------
 
 
 
@@ -18,7 +20,8 @@ public:
 	// TEMP || If last click don`t save cords, or if need save |
 	void Enable_Hook();
 	void Disable_Hook();
-	void FFmpeg_Command_Run();
+	void FFmpeg_Command_Run(const wchar_t *str);
+	void FFmpeg_Stop();
 
 	static void Array_Clear();
 
@@ -27,6 +30,9 @@ public:
 	static int *Ptr_Y_Cords;
 	static int *Array_X_Cords;
 	static int *Array_Y_Cords;
+
+	static HANDLE Fmpeg_Process;
+	static HANDLE Fmpeg_Stdin;
 	// TEMP END
 
 	static wchar_t *Handle_Clipboard();
