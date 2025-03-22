@@ -27,7 +27,7 @@ public:
 	void Enable_Hook(bool is_enable);  // !!!
 	void Get_XY_Cords(int **ptr_x, int **ptr_y);
 	void Reset_Tools();  // !!!
-	void FFmpeg_Command_Run(const wchar_t *str);
+	void FFmpeg_Chank_List_Record();
 	void FFmpeg_Command_Stop();
 
 	int *Temp_Array_Ptr;

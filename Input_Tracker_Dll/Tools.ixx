@@ -21,7 +21,7 @@ public:
 	// TEMP || If last click don`t save cords, or if need save |
 	void Enable_Hook();
 	void Disable_Hook();
-	void FFmpeg_Command_Run(const wchar_t *str);
+	void FFmpeg_Chank_List_Record();
 	void FFmpeg_Stop();
 
 	static void Array_Clear();
@@ -39,6 +39,7 @@ public:
 	static wchar_t *Handle_Clipboard();  // !!! mem leak, need free memory or use smurf pointers
 
 private:
+	// !!! Create class what have only import filesystem to handle windows filesystem
 	void Get_File_Unique_Name(const wchar_t *text_chank_lists, std::wstring &file_name);
 	void Get_Ffmpeg_Cons_Command();
 };
@@ -49,5 +50,7 @@ private:
 	X - Maybe move all file to folder if many re_jenna_00 - 99 it`s good
 		- how to
 	X - Make UI and start big refactoring
+	X - Can add button to store .m3u8 url just create button with nick what store those url and when press start record?
+	X -
 */
 #pragma endregion
