@@ -16,11 +16,11 @@ struct SHUD_Settings
 	wchar_t *Draw_String;
 };
 //------------------------------------------------------------------------------------------------------------
-class DLL_API ATemplate  // Interface api | Rename
+class DLL_API AEvent_Handler  // Interface api | Rename
 {
 public:
-	~ATemplate();
-	ATemplate();
+	~AEvent_Handler();
+	AEvent_Handler();
 
 	int Init();
 	wchar_t *Handle_Clipboard();
