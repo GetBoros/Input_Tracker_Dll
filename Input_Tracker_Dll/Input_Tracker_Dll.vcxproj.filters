@@ -4,7 +4,7 @@
     <Filter Include="Dll_Main">
       <UniqueIdentifier>{1ccc39af-de13-4674-86c0-17fa3d97f54b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Dll_Main\Tools">
+    <Filter Include="Tools">
       <UniqueIdentifier>{2dd17511-3f46-4eb8-b1ee-35693bfceed8}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -13,10 +13,10 @@
       <Filter>Dll_Main</Filter>
     </ClCompile>
     <ClCompile Include="Tools.ixx">
-      <Filter>Dll_Main\Tools</Filter>
+      <Filter>Tools</Filter>
     </ClCompile>
     <ClCompile Include="Tools.cpp">
-      <Filter>Dll_Main\Tools</Filter>
+      <Filter>Tools</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

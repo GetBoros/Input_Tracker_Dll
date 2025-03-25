@@ -9,11 +9,11 @@
 //------------------------------------------------------------------------------------------------------------
 struct SHUD_Settings
 {
+	int Cmd_Show;
 	int HUD_Width;
 	int HUD_Height;
-	int X_Cord;
-	int Y_Cord;
-	wchar_t *Draw_String;
+	wchar_t *Title_Name;
+	wchar_t *Title_Name_Class;
 };
 //------------------------------------------------------------------------------------------------------------
 class DLL_API AEvent_Handler  // Interface api | Rename
@@ -29,6 +29,7 @@ public:
 	void Reset_Tools();  // !!!
 	void FFmpeg_Chank_List_Record();
 	void FFmpeg_Command_Stop();
+	void Clicker();
 
 	int *Temp_Array_Ptr;
 	int *Arra_Cords;

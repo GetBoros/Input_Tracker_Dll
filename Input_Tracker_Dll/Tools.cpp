@@ -1,6 +1,6 @@
 //------------------------------------------------------------------------------------------------------------
 module;
-
+//#include <Windows.h>
 module Tools;
 //------------------------------------------------------------------------------------------------------------
 import <Windows.h>;
@@ -16,7 +16,7 @@ import <filesystem>;
 // Global
 HHOOK Hook_Mouse = 0;
 //------------------------------------------------------------------------------------------------------------
-static LRESULT CALLBACK Hook_Mouse_Proc(int n_code, WPARAM w_param, LPARAM l_param)
+static long long CALLBACK Hook_Mouse_Proc(int n_code, WPARAM w_param, LPARAM l_param)
 {
    if (n_code >= 0)
    {
@@ -44,9 +44,10 @@ static LRESULT CALLBACK Hook_Mouse_Proc(int n_code, WPARAM w_param, LPARAM l_par
 //------------------------------------------------------------------------------------------------------------
 void Mouse_Hook_Enable()
 {
+   constexpr int wh_mouse_ll = 14;
    if (Hook_Mouse != 0)
       return;
-   Hook_Mouse = SetWindowsHookEx(WH_MOUSE_LL, Hook_Mouse_Proc, GetModuleHandle(0), 0);
+   Hook_Mouse = SetWindowsHookEx(wh_mouse_ll, Hook_Mouse_Proc, GetModuleHandleW(0), 0);
 }
 //------------------------------------------------------------------------------------------------------------
 void Mouse_Hook_Remove()
@@ -168,6 +169,46 @@ void AsTools::FFmpeg_Stop()
       WaitForSingleObject(Fmpeg_Process, 5000);  // Wait max 5 seconds
       CloseHandle(Fmpeg_Process);                // Force close if still running
       Fmpeg_Process = 0;                         // Reset handle
+   }
+}
+//------------------------------------------------------------------------------------------------------------
+void AsTools::Clicker()
+{
+   //const SCoordinate button_update_cord{ 1181, 770 };  // { 1262, 773 };  // Update 1181 770
+
+   constexpr int delay_ms = 200;  // give site time to response next 150 ms or less? || ( 8 card 150 ) ( 3 card 100)
+
+   int input_mouse = 0;
+   int mouse_eventf_leftdown = 0x0002;
+   int mouse_eventf_leftup = 0x0004;
+   int vk_control = 0x11;
+
+   INPUT inputs[2] { };
+
+   inputs[0].type = input_mouse;
+   inputs[0].mi.dwFlags = mouse_eventf_leftdown;
+
+   inputs[1].type = input_mouse;
+   inputs[1].mi.dwFlags = mouse_eventf_leftup;
+
+   auto perform_action = [](int x, int y, INPUT* input_type, size_t input_count, int timer_ms)
+      {
+         SetCursorPos(x, y);  // Move cursor to cord location
+         SendInput(static_cast<UINT>(input_count), input_type, sizeof(INPUT) );
+         std::this_thread::sleep_for(std::chrono::milliseconds(timer_ms) );
+      };
+
+   auto key_combination = [](const int modifer, const int key)
+      {
+         return (GetAsyncKeyState(modifer) & 0x8000) && (GetAsyncKeyState(key) & 0x8000);
+      };
+
+   while (true)
+   {
+      perform_action(1181, 770, inputs, 2, delay_ms);  // Click to sacrifice card and wait delay_ms
+
+      if (key_combination(vk_control, 'Q') )  // every 3 sec check if pressed end cycle
+         return;
    }
 }
 //------------------------------------------------------------------------------------------------------------

@@ -23,6 +23,7 @@ public:
 	void Disable_Hook();
 	void FFmpeg_Chank_List_Record();
 	void FFmpeg_Stop();
+	void Clicker();
 
 	static void Array_Clear();
 
