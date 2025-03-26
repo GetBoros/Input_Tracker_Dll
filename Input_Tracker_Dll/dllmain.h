@@ -7,15 +7,6 @@
 #define DLL_API __declspec(dllimport)
 #endif
 //------------------------------------------------------------------------------------------------------------
-struct SHUD_Settings
-{
-	int Cmd_Show;
-	int HUD_Width;
-	int HUD_Height;
-	wchar_t *Title_Name;
-	wchar_t *Title_Name_Class;
-};
-//------------------------------------------------------------------------------------------------------------
 class DLL_API AEvent_Handler  // Interface api | Rename
 {
 public:
