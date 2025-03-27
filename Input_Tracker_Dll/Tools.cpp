@@ -1,6 +1,6 @@
 //------------------------------------------------------------------------------------------------------------
 module;
-//#include <Windows.h>
+#include <Windows.h>
 module Tools;
 //------------------------------------------------------------------------------------------------------------
 import <Windows.h>;
@@ -174,14 +174,11 @@ void AsTools::FFmpeg_Stop()
 //------------------------------------------------------------------------------------------------------------
 void AsTools::Clicker()
 {
-   //const SCoordinate button_update_cord{ 1181, 770 };  // { 1262, 773 };  // Update 1181 770
-
    constexpr int delay_ms = 200;  // give site time to response next 150 ms or less? || ( 8 card 150 ) ( 3 card 100)
-
-   int input_mouse = 0;
-   int mouse_eventf_leftdown = 0x0002;
-   int mouse_eventf_leftup = 0x0004;
-   int vk_control = 0x11;
+   constexpr int input_mouse = 0;
+   constexpr int mouse_eventf_leftdown = 0x0002;
+   constexpr int mouse_eventf_leftup = 0x0004;
+   constexpr int vk_control = 0x11;
 
    INPUT inputs[2] { };
 
@@ -191,7 +188,7 @@ void AsTools::Clicker()
    inputs[1].type = input_mouse;
    inputs[1].mi.dwFlags = mouse_eventf_leftup;
 
-   auto perform_action = [](int x, int y, INPUT* input_type, size_t input_count, int timer_ms)
+   auto perform_action = [](int x, int y, INPUT *input_type, size_t input_count, int timer_ms)
       {
          SetCursorPos(x, y);  // Move cursor to cord location
          SendInput(static_cast<UINT>(input_count), input_type, sizeof(INPUT) );
@@ -203,13 +200,8 @@ void AsTools::Clicker()
          return (GetAsyncKeyState(modifer) & 0x8000) && (GetAsyncKeyState(key) & 0x8000);
       };
 
-   while (true)
-   {
+   while (!key_combination(vk_control, 'Q') )  // if holding ctrl + q
       perform_action(1181, 770, inputs, 2, delay_ms);  // Click to sacrifice card and wait delay_ms
-
-      if (key_combination(vk_control, 'Q') )  // every 3 sec check if pressed end cycle
-         return;
-   }
 }
 //------------------------------------------------------------------------------------------------------------
 void AsTools::Array_Clear()
