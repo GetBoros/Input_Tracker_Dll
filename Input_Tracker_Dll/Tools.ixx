@@ -3,7 +3,7 @@ module;
 
 export module Tools;
 //------------------------------------------------------------------------------------------------------------
-import <sstream>;
+export import <sstream>;
 import <Windows.h>;
 //------------------------------------------------------------------------------------------------------------
 
@@ -21,7 +21,7 @@ public:
 	// TEMP || If last click don`t save cords, or if need save |
 	void Enable_Hook();
 	void Disable_Hook();
-	void FFmpeg_Chank_List_Record(bool &is_record);
+	bool FFmpeg_Chank_List_Record(wchar_t **file_name_result);
 	void FFmpeg_FFmpeg_Chank_List_Stop();
 	void Clicker();
 

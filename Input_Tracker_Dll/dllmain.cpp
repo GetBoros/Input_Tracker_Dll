@@ -51,10 +51,9 @@ void AEvent_Handler::Reset_Tools()
 	AsTools::Array_Clear();
 }
 //------------------------------------------------------------------------------------------------------------
-void AEvent_Handler::FFmpeg_Chank_List_Record(bool &is_record)
+bool AEvent_Handler::FFmpeg_Chank_List_Record(wchar_t **file_name)
 {
-	AsTools tools;
-	tools.FFmpeg_Chank_List_Record(is_record);
+	return AsTools().FFmpeg_Chank_List_Record(file_name);
 }
 //------------------------------------------------------------------------------------------------------------
 void AEvent_Handler::FFmpeg_Chank_List_Stop()

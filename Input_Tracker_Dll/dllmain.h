@@ -18,7 +18,7 @@ public:
 	void Enable_Hook(bool is_enable);  // !!!
 	void Get_XY_Cords(int **ptr_x, int **ptr_y);
 	void Reset_Tools();  // !!!
-	void FFmpeg_Chank_List_Record(bool &is_record);
+	bool FFmpeg_Chank_List_Record(wchar_t **file_name);
 	void FFmpeg_Chank_List_Stop();
 	void Clicker();
 
