@@ -21,8 +21,8 @@ public:
 	// TEMP || If last click don`t save cords, or if need save |
 	void Enable_Hook();
 	void Disable_Hook();
-	void FFmpeg_Chank_List_Record();
-	void FFmpeg_Stop();
+	void FFmpeg_Chank_List_Record(bool &is_record);
+	void FFmpeg_FFmpeg_Chank_List_Stop();
 	void Clicker();
 
 	static void Array_Clear();

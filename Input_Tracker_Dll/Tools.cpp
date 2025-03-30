@@ -94,7 +94,7 @@ void AsTools::Disable_Hook()
    Mouse_Hook_Remove();
 }
 //------------------------------------------------------------------------------------------------------------
-void AsTools::FFmpeg_Chank_List_Record()
+void AsTools::FFmpeg_Chank_List_Record(bool &is_record)
 {
    wchar_t *text_chank_lists = 0;
    HANDLE handle_input_read = 0;
@@ -115,6 +115,7 @@ void AsTools::FFmpeg_Chank_List_Record()
    if (file_name[0] == 0)  // file name == 0 when it`s not a chat bate url so exit
    {
       delete[] text_chank_lists;
+      is_record = false;
       return;
    }
    cons_command = L"ffmpeg -i \"" + std::wstring(text_chank_lists) + L"\" -c:v libx264 -preset veryfast -crf 23 -c:a aac -b:a 128k " + file_name;
@@ -152,9 +153,10 @@ void AsTools::FFmpeg_Chank_List_Record()
    }
 
    delete[] text_chank_lists;
+   is_record = true;
 }
 //------------------------------------------------------------------------------------------------------------
-void AsTools::FFmpeg_Stop()
+void AsTools::FFmpeg_FFmpeg_Chank_List_Stop()
 {
    if (Fmpeg_Stdin != 0)  // Explicit check
    {

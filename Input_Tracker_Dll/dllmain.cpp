@@ -51,16 +51,16 @@ void AEvent_Handler::Reset_Tools()
 	AsTools::Array_Clear();
 }
 //------------------------------------------------------------------------------------------------------------
-void AEvent_Handler::FFmpeg_Chank_List_Record()
+void AEvent_Handler::FFmpeg_Chank_List_Record(bool &is_record)
 {
 	AsTools tools;
-	tools.FFmpeg_Chank_List_Record();
+	tools.FFmpeg_Chank_List_Record(is_record);
 }
 //------------------------------------------------------------------------------------------------------------
-void AEvent_Handler::FFmpeg_Command_Stop()
+void AEvent_Handler::FFmpeg_Chank_List_Stop()
 {
 	AsTools tools;
-	tools.FFmpeg_Stop();
+	tools.FFmpeg_FFmpeg_Chank_List_Stop();
 }
 //------------------------------------------------------------------------------------------------------------
 void AEvent_Handler::Clicker()
