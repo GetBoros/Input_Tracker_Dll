@@ -176,7 +176,7 @@ void AsTools::FFmpeg_FFmpeg_Chank_List_Stop()
    }
 }
 //------------------------------------------------------------------------------------------------------------
-void AsTools::Clicker()
+void AsTools::Clicker_Handler()
 {
    constexpr int delay_ms = 200;  // give site time to response next 150 ms or less? || ( 8 card 150 ) ( 3 card 100)
    constexpr int input_mouse = 0;

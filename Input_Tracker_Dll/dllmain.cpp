@@ -2,6 +2,10 @@
 #include "dllmain.h"
 //------------------------------------------------------------------------------------------------------------
 import Tools;
+//------------------------------------------------------------------------------------------------------------
+
+
+
 
 
 // AEvent_Handler
@@ -15,6 +19,34 @@ AEvent_Handler::AEvent_Handler()
 {
 	Arra_Cords = new int[10] {};
 	Temp_Array_Ptr = Arra_Cords;
+}
+//------------------------------------------------------------------------------------------------------------
+bool AEvent_Handler::Update_State(const EEvent_State event_state, wchar_t **file_name)
+{
+	int yy = 0;  // !!! refactoring || re-work
+
+	switch (event_state)
+	{
+	case EEvent_State::EES_Hook_Enable:
+		yy++;
+		break;
+
+	case EEvent_State::EES_Clicker_Handler:
+		Clicker_Handler();
+		break;
+	case EEvent_State::EES_Clipboard_Handler:
+		break;
+	case EEvent_State::EES_Chunk_List_Record_Start:
+		return FFmpeg_Chank_List_Record(file_name);
+		break;
+	case EEvent_State::EES_Chunk_List_Record_Stop:
+		FFmpeg_Chank_List_Stop();
+		break;
+	default:
+		break;
+	}
+
+	return true;
 }
 //------------------------------------------------------------------------------------------------------------
 int AEvent_Handler::Init()
@@ -62,9 +94,8 @@ void AEvent_Handler::FFmpeg_Chank_List_Stop()
 	tools.FFmpeg_FFmpeg_Chank_List_Stop();
 }
 //------------------------------------------------------------------------------------------------------------
-void AEvent_Handler::Clicker()
+void AEvent_Handler::Clicker_Handler()
 {
-	AsTools tools;
-	tools.Clicker();
+	AsTools().Clicker_Handler();
 }
 //------------------------------------------------------------------------------------------------------------

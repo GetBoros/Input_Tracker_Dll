@@ -23,7 +23,7 @@ public:
 	void Disable_Hook();
 	bool FFmpeg_Chank_List_Record(wchar_t **file_name_result);
 	void FFmpeg_FFmpeg_Chank_List_Stop();
-	void Clicker();
+	void Clicker_Handler();
 
 	static void Array_Clear();
 
