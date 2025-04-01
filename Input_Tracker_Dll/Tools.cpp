@@ -134,7 +134,7 @@ bool AsTools::FFmpeg_Chank_List_Record(wchar_t **file_name_result)
 
    wcsncpy_s(cmd.data(), cmd.size(), cons_command.c_str(), cmd.size() - 1);
 
-   if (CreateProcessW(0, cmd.data(), 0, 0, true, 0, 0, 0, &si, &pi))
+   if (CreateProcessW(0, cmd.data(), 0, 0, true, 0, 0, 0, &si, &pi) )
    {
       CloseHandle(pi.hThread);  // Close thread handle
       CloseHandle(handle_input_read);  // Close unused read end
@@ -142,7 +142,7 @@ bool AsTools::FFmpeg_Chank_List_Record(wchar_t **file_name_result)
       Fmpeg_Process = pi.hProcess;  // Save process handle
       Fmpeg_Stdin = handle_input_write;  // Save write pipe
 
-      std::thread([&pi]() { WaitForSingleObject(pi.hProcess, INFINITE); } ).detach();
+      std::thread( [&pi]() { WaitForSingleObject(pi.hProcess, INFINITE); } ).detach();
    }
    else
    {
@@ -153,7 +153,7 @@ bool AsTools::FFmpeg_Chank_List_Record(wchar_t **file_name_result)
 
    delete[] text_chank_lists;
 
-   *file_name_result = new wchar_t[wcslen(file_name.c_str() ) + 1] {};
+   *file_name_result = new wchar_t[wcslen(file_name.c_str() ) + 1] { };
    wcsncpy_s(*file_name_result, wcslen(file_name.c_str() ) + 1, file_name.c_str(), wcslen(file_name.c_str() ) );
    return true;
 }
