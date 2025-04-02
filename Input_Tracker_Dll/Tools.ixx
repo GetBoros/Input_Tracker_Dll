@@ -48,10 +48,49 @@ private:
 
 #pragma region TASKS
 /*
+	X - Five buttons:
+		V - Save chunks
+		X - Start recording desktop
+		X - Make screen shoots
 	X - Maybe move all file to folder if many re_jenna_00 - 99 it`s good
 		- how to
 	X - Make UI and start big refactoring
 	X - Can add button to store .m3u8 url just create button with nick what store those url and when press start record?
 	X -
+*/
+#pragma endregion
+
+#pragma region TASKS_SAVE_DESTOP
+/*
+	X - Every 5 seconds save desktops
+*/
+#pragma endregion
+
+
+#pragma region FFMPEG
+//
+/*
+	ffplay -hwaccel qsv -i "https://edge6-hel.live.mmcdn.com/live-edge/amlst:sincere_shyness-sd-c1f6b213faeaf4d2aca39c22606c277265abb4fae1a8ac2e8c53deca2294dca5_trns_h264/chunklist_w1074660170_b5128000_t64RlBTOjMwLjA=.m3u8"
+	
+*/
+#pragma endregion
+
+
+#pragma region FFPROB_TEST_EXAMPLES
+// HELP Used to get || scale | bitrate | codec | length | all in file | meta data ||
+/*
+	
+	ffprob input.webp
+	ffprobe -v quiet -print_format json -show_format -show_streams input.webp
+	ffprobe -v error -select_streams v:0 -show_entries stream=width,height,bit_rate,codec_name -of default=noprint_wrappers=1 ""
+
+*/
+#pragma endregion
+
+#pragma region FFPLAY_TEST_EXAMPLES
+//
+/*
+	ffplay -user_agent "Boros" "https://edge6-hel.live.mmcdn.com/live-edge/amlst:sincere_shyness-sd-c1f6b213faeaf4d2aca39c22606c277265abb4fae1a8ac2e8c53deca2294dca5_trns_h264/chunklist_w1074660170_b5128000_t64RlBTOjMwLjA=.m3u8"
+
 */
 #pragma endregion
