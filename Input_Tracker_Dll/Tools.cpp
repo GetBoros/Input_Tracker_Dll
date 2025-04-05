@@ -205,7 +205,7 @@ void AsTools::Clicker_Handler()
       };
 
    while (!key_combination(vk_control, 'Q') )  // if holding ctrl + q
-      perform_action(1181, 770, inputs, 2, delay_ms);  // Click to sacrifice card and wait delay_ms
+      perform_action(1183, 770, inputs, 2, delay_ms);  // Click to sacrifice card and wait delay_ms
 }
 //------------------------------------------------------------------------------------------------------------
 void AsTools::Array_Clear()
