@@ -44,6 +44,10 @@ bool AEvent_Handler::Update_State(const EEvent_State event_state, wchar_t **file
 		FFmpeg_Chank_List_Stop();
 		break;
 
+	case EEvent_State::EES_Curl_Examples:
+		Curl_Example();
+		break;
+
 	default:
 		break;
 	}
@@ -94,6 +98,11 @@ void AEvent_Handler::FFmpeg_Chank_List_Stop()
 {
 	AsTools tools;
 	tools.FFmpeg_FFmpeg_Chank_List_Stop();
+}
+//------------------------------------------------------------------------------------------------------------
+void AEvent_Handler::Curl_Example()
+{
+	AsTools().Curl_Examples();
 }
 //------------------------------------------------------------------------------------------------------------
 void AEvent_Handler::Clicker_Handler()

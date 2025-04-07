@@ -1,6 +1,7 @@
 //------------------------------------------------------------------------------------------------------------
 module;
 #include <Windows.h>
+#include <curl/curl.h>  // !!! Send to other file
 module Tools;
 //------------------------------------------------------------------------------------------------------------
 import <Windows.h>;
@@ -9,7 +10,7 @@ import <array>;
 import <thread>;
 import <filesystem>;
 //------------------------------------------------------------------------------------------------------------
-
+   
 
 
 
@@ -55,6 +56,13 @@ void Mouse_Hook_Remove()
    if (Hook_Mouse)
       UnhookWindowsHookEx(Hook_Mouse);
    Hook_Mouse = 0;
+}
+//------------------------------------------------------------------------------------------------------------
+static size_t WriteCallback(void* contents, size_t size, size_t nmemb, std::string* output)
+{
+   size_t total_size = size * nmemb;
+   output->append((char*)contents, total_size);
+   return total_size;
 }
 //------------------------------------------------------------------------------------------------------------
 
@@ -176,9 +184,51 @@ void AsTools::FFmpeg_FFmpeg_Chank_List_Stop()
    }
 }
 //------------------------------------------------------------------------------------------------------------
+void AsTools::Curl_Examples()
+{
+   int yy = 0;
+   CURL* curl;
+   CURLcode res;
+   std::string response_data;
+
+   // Инициализация libcurl
+   curl = curl_easy_init();
+   if (curl) {
+      // Устанавливаем URL для проверки IP (используем api.ipify.org)
+      curl_easy_setopt(curl, CURLOPT_URL, "https://api.ipify.org?format=json");
+
+      // Указываем Tor-прокси (SOCKS5)
+      /*
+         // just execute befor
+         C:\Tor\Tor\tor.exe
+      */
+      curl_easy_setopt(curl, CURLOPT_PROXY, "socks5h://127.0.0.1:9050");
+
+      // Устанавливаем callback для записи ответа
+      curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteCallback);
+      curl_easy_setopt(curl, CURLOPT_WRITEDATA, &response_data);
+
+      // Выполняем запрос
+      res = curl_easy_perform(curl);
+
+      // Проверяем на ошибки
+      if (res != CURLE_OK) {
+         yy++;  // error
+      }
+      else {
+         response_data;  // receive data
+      }
+
+      curl_easy_cleanup(curl);
+   }
+   else {
+      yy++;  // error
+   }
+}
+//------------------------------------------------------------------------------------------------------------
 void AsTools::Clicker_Handler()
 {
-   constexpr int delay_ms = 250;  // give site time to response next 150 ms or less? || ( 8 card 150 ) ( 3 card 100)
+   constexpr int delay_ms = 150;  // give site time to response next 150 ms or less? || ( 8 card 150 ) ( 3 card 100)
    constexpr int input_mouse = 0;
    constexpr int mouse_eventf_leftdown = 0x0002;
    constexpr int mouse_eventf_leftup = 0x0004;

@@ -13,7 +13,8 @@ enum class EEvent_State
 	EES_Clicker_Handler,
 	EES_Clipboard_Handler,
 	EES_Chunk_List_Record_Start,
-	EES_Chunk_List_Record_Stop
+	EES_Chunk_List_Record_Stop,
+	EES_Curl_Examples
 };
 //------------------------------------------------------------------------------------------------------------
 class DLL_API AEvent_Handler  // Interface api | Rename
@@ -36,7 +37,7 @@ private:
 	void Clicker_Handler();
 	bool FFmpeg_Chank_List_Record(wchar_t **file_name);
 	void FFmpeg_Chank_List_Stop();
-
+	void Curl_Example();
 
 };
 //------------------------------------------------------------------------------------------------------------
