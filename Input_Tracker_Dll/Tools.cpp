@@ -187,15 +187,15 @@ void AsTools::FFmpeg_FFmpeg_Chank_List_Stop()
 void AsTools::Curl_Examples()
 {
    int yy = 0;
-   CURL* curl;
+   CURL *curl = 0;
    CURLcode res;
    std::string response_data;
 
    // Инициализация libcurl
    curl = curl_easy_init();
-   if (curl) {
-      // Устанавливаем URL для проверки IP (используем api.ipify.org)
-      curl_easy_setopt(curl, CURLOPT_URL, "https://api.ipify.org?format=json");
+   if (curl)
+   {
+      curl_easy_setopt(curl, CURLOPT_URL, "https://api.ipify.org?format=json");   // Устанавливаем URL для проверки IP (используем api.ipify.org)
 
       // Указываем Tor-прокси (SOCKS5)
       /*
@@ -203,27 +203,21 @@ void AsTools::Curl_Examples()
          C:\Tor\Tor\tor.exe
       */
       curl_easy_setopt(curl, CURLOPT_PROXY, "socks5h://127.0.0.1:9050");
-
-      // Устанавливаем callback для записи ответа
-      curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteCallback);
+      
+      curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteCallback);  // Устанавливаем callback для записи ответа
       curl_easy_setopt(curl, CURLOPT_WRITEDATA, &response_data);
 
-      // Выполняем запрос
-      res = curl_easy_perform(curl);
+      res = curl_easy_perform(curl);  // Выполняем запрос
 
-      // Проверяем на ошибки
-      if (res != CURLE_OK) {
+      if (res != CURLE_OK)  // Проверяем на ошибки
          yy++;  // error
-      }
-      else {
+      else
          response_data;  // receive data
-      }
 
       curl_easy_cleanup(curl);
    }
-   else {
+   else
       yy++;  // error
-   }
 }
 //------------------------------------------------------------------------------------------------------------
 void AsTools::Clicker_Handler()
