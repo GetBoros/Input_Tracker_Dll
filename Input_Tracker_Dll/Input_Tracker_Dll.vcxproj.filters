@@ -24,4 +24,12 @@
       <Filter>Dll_Main</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="scrape_cards.py">
+      <Filter>Tools</Filter>
+    </None>
+    <None Include="parse_card.py">
+      <Filter>Tools</Filter>
+    </None>
+  </ItemGroup>
 </Project>

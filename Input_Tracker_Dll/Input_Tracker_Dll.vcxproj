@@ -165,6 +165,10 @@
   <ItemGroup>
     <ClInclude Include="dllmain.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="parse_card.py" />
+    <None Include="scrape_cards.py" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
