@@ -40,7 +40,7 @@ def scrape_single_card():
         with open("card_35176_users.json", "w", encoding="utf-8") as f:
             json.dump(results, f, ensure_ascii=False, indent=2)
         
-        browser.close()
+        browser.close()  # close browser
         print("Успех! Данные сохранены.")
 
 if __name__ == "__main__":
