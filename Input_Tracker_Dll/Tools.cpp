@@ -92,12 +92,12 @@ void AsTools::Throw()
    return throw 13;
 }
 //------------------------------------------------------------------------------------------------------------
-void AsTools::Enable_Hook()
+void AsTools::Hook_Enable()
 {
    Mouse_Hook_Enable();
 }
 //------------------------------------------------------------------------------------------------------------
-void AsTools::Disable_Hook()
+void AsTools::Hook_Disable()
 {
    Mouse_Hook_Remove();
 }
@@ -166,7 +166,7 @@ bool AsTools::FFmpeg_Chank_List_Record(wchar_t **file_name_result)
    return true;
 }
 //------------------------------------------------------------------------------------------------------------
-void AsTools::FFmpeg_FFmpeg_Chank_List_Stop()
+void AsTools::FFmpeg_Chank_List_Stop()
 {
    if (Fmpeg_Stdin != 0)  // Explicit check
    {

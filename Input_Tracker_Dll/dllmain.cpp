@@ -69,13 +69,12 @@ wchar_t *AEvent_Handler::Handle_Clipboard()
 	return format_wstring;
 }
 //------------------------------------------------------------------------------------------------------------
-void AEvent_Handler::Enable_Hook(bool is_enable)
+void AEvent_Handler::Enable_Hook(const bool is_enable)
 {
-	AsTools tools;
 	if (is_enable)
-		tools.Enable_Hook();
+		AsTools().Hook_Enable();
 	else
-		tools.Disable_Hook();
+		AsTools().Hook_Disable();
 }
 //------------------------------------------------------------------------------------------------------------
 void AEvent_Handler::Get_XY_Cords(int **ptr_x, int **ptr_y)
@@ -97,7 +96,7 @@ bool AEvent_Handler::FFmpeg_Chank_List_Record(wchar_t **file_name)
 void AEvent_Handler::FFmpeg_Chank_List_Stop()
 {
 	AsTools tools;
-	tools.FFmpeg_FFmpeg_Chank_List_Stop();
+	tools.FFmpeg_Chank_List_Stop();
 }
 //------------------------------------------------------------------------------------------------------------
 void AEvent_Handler::Curl_Example()

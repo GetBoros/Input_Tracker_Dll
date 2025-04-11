@@ -6,10 +6,6 @@ export module Tools;
 export import <sstream>;
 import <Windows.h>;
 //------------------------------------------------------------------------------------------------------------
-
-
-
-//------------------------------------------------------------------------------------------------------------
 export class AsTools
 {
 public:
@@ -19,10 +15,10 @@ public:
 	void Throw();
 
 	// TEMP || If last click don`t save cords, or if need save |
-	void Enable_Hook();
-	void Disable_Hook();
+	void Hook_Enable();
+	void Hook_Disable();
 	bool FFmpeg_Chank_List_Record(wchar_t **file_name_result);
-	void FFmpeg_FFmpeg_Chank_List_Stop();
+	void FFmpeg_Chank_List_Stop();
 	void Curl_Examples();  // !!! TASK Login and create coockies | Run tor bundler and receive our IP for feature examples
 
 	void Clicker_Handler();

@@ -27,7 +27,7 @@ public:
 
 	int Init();
 	wchar_t *Handle_Clipboard();
-	void Enable_Hook(bool is_enable);  // !!!
+	void Enable_Hook(const bool is_enable);  // !!!
 	void Get_XY_Cords(int **ptr_x, int **ptr_y);
 	void Reset_Tools();  // !!!
 	int *Temp_Array_Ptr;
