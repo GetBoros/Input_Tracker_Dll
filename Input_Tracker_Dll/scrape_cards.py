@@ -1,7 +1,7 @@
 ﻿from playwright.sync_api import sync_playwright
 import json
 import random  # Randow delay
-import time    # timestamp in file name
+import time  # timestamp in file name
 
 def scrape_cards():
     results = []
