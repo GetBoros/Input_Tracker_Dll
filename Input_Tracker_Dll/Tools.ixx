@@ -54,7 +54,8 @@ private:
 		- how to
 	X - Make UI and start big refactoring
 	X - Can add button to store .m3u8 url just create button with nick what store those url and when press start record?
-	X -
+	X - Please make every 10 second make screen shoot with ffmpeg thanks
+
 */
 #pragma endregion
 
