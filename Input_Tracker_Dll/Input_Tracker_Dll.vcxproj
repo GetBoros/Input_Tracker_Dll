@@ -119,11 +119,14 @@
       <EnableModules>true</EnableModules>
       <BuildStlModules>true</BuildStlModules>
       <LanguageStandard_C>stdclatest</LanguageStandard_C>
+      <AdditionalIncludeDirectories>C:\Users\getbo\AppData\Local\Programs\Python\Python313\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableUAC>false</EnableUAC>
+      <AdditionalLibraryDirectories>C:\Users\getbo\AppData\Local\Programs\Python\Python313\libs</AdditionalLibraryDirectories>
+      <AdditionalDependencies>python313_d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -143,6 +146,7 @@
       <EnableModules>true</EnableModules>
       <BuildStlModules>true</BuildStlModules>
       <LanguageStandard_C>stdclatest</LanguageStandard_C>
+      <AdditionalIncludeDirectories>C:\Users\getbo\AppData\Local\Programs\Python\Python313\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -150,6 +154,8 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableUAC>false</EnableUAC>
+      <AdditionalLibraryDirectories>C:\Users\getbo\AppData\Local\Programs\Python\Python313\libs</AdditionalLibraryDirectories>
+      <AdditionalDependencies>python313_d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -166,6 +172,8 @@
     <ClInclude Include="dllmain.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="get_card_ids.py" />
+    <None Include="get_card_users.py" />
     <None Include="parse_card.py" />
     <None Include="scrape_cards.py" />
   </ItemGroup>

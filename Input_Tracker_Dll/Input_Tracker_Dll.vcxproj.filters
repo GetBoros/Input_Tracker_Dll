@@ -34,5 +34,11 @@
     <None Include="scrape_cards.py">
       <Filter>Tools\Pyton</Filter>
     </None>
+    <None Include="get_card_ids.py">
+      <Filter>Tools\Pyton</Filter>
+    </None>
+    <None Include="get_card_users.py">
+      <Filter>Tools\Pyton</Filter>
+    </None>
   </ItemGroup>
 </Project>

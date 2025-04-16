@@ -16,7 +16,8 @@ enum class EEvent_State
 	EES_Clipboard_Handler,
 	EES_Chunk_List_Record_Start,
 	EES_Chunk_List_Record_Stop,
-	EES_Curl_Examples
+	EES_Curl_Examples,
+	EES_Pyton_Examples
 };
 //------------------------------------------------------------------------------------------------------------
 class DLL_API AEvent_Handler  // Interface api | Rename

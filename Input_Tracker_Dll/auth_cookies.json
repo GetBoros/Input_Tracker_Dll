@@ -1,0 +1,92 @@
+[
+  {
+    "name": "__ddg9_",
+    "value": "185.19.6.90",
+    "domain": ".asstars.tv",
+    "path": "/",
+    "expires": 1744713996.863847,
+    "httpOnly": false,
+    "secure": false,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "__ddg1_",
+    "value": "xwGKNDzB9Hkcx4gOgdm7",
+    "domain": ".asstars.tv",
+    "path": "/",
+    "expires": 1776107154.611743,
+    "httpOnly": true,
+    "secure": false,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "e76c8b3202770788f75d5fd29b60b575",
+    "value": "4ad207d68f6b8d4a94cdb1b56ad421f9",
+    "domain": "asstars.tv",
+    "path": "/",
+    "expires": 1744578354.611757,
+    "httpOnly": false,
+    "secure": false,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "__ddg10_",
+    "value": "1744571170",
+    "domain": ".asstars.tv",
+    "path": "/",
+    "expires": 1744713996.863825,
+    "httpOnly": false,
+    "secure": false,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "PHPSESSID",
+    "value": "b0553ug9dcfgjvgu0qjsdcdkjh",
+    "domain": "asstars.tv",
+    "path": "/",
+    "expires": -1,
+    "httpOnly": true,
+    "secure": true,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "dle_user_id",
+    "value": "104353",
+    "domain": "asstars.tv",
+    "path": "/",
+    "expires": 1776107170.747814,
+    "httpOnly": true,
+    "secure": true,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "dle_password",
+    "value": "6b1f5d7b0411faf5fe502fab095acf35",
+    "domain": "asstars.tv",
+    "path": "/",
+    "expires": 1776107170.747838,
+    "httpOnly": true,
+    "secure": true,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "dle_newpm",
+    "value": "0",
+    "domain": "asstars.tv",
+    "path": "/",
+    "expires": 1776107170.74785,
+    "httpOnly": true,
+    "secure": true,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "__ddg8_",
+    "value": "PXDAac2W8gL0f1zY",
+    "domain": ".asstars.tv",
+    "path": "/",
+    "expires": 1744713996.863725,
+    "httpOnly": false,
+    "secure": false,
+    "sameSite": "Lax"
+  }
+]

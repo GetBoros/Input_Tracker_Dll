@@ -54,6 +54,10 @@ bool AEvent_Handler::Update_State(const EEvent_State event_state, wchar_t **file
 		AsTools().Curl_Examples();
 		break;
 
+	case EEvent_State::EES_Pyton_Examples:
+		AsTools().Pyton_Run();
+		break;
+
 	default:
 		AsTools().Throw();
 	}

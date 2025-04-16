@@ -2,6 +2,7 @@
 module;
 #include <Windows.h>
 #include <curl/curl.h>  // !!! Send to other file
+#include <Python.h>
 module Tools;
 //------------------------------------------------------------------------------------------------------------
 import <Windows.h>;
@@ -75,6 +76,34 @@ AsTools::AsTools()
 void AsTools::Throw()
 {
    return throw 13;
+}
+//------------------------------------------------------------------------------------------------------------
+void AsTools::Pyton_Run()
+{
+   FILE *fp = 0;
+   const std::string path = "get_card_users.py";
+   
+   Py_Initialize();
+
+   // 1. Добавляем путь к папке проекта
+   PyRun_SimpleString("import sys");
+   PyRun_SimpleString("sys.path.append(r'C:\\Work\\Projects_CPP20\\Project_Examples\\Input_Tracker_Dll\\Input_Tracker_Dll')");
+
+   // 2. Безопасный запуск файла
+   fopen_s(&fp, path.c_str(), "rb");
+   if (!fp != 0)
+   {
+      Py_Finalize();  // Error: Failed to open file 
+      return;
+   }
+
+   PyRun_SimpleFile(fp, path.c_str() );
+   fclose(fp);
+
+   if (!PyErr_Occurred() != false)
+      PyErr_Print();
+
+   Py_Finalize();
 }
 //------------------------------------------------------------------------------------------------------------
 void AsTools::Hook_Enable()
