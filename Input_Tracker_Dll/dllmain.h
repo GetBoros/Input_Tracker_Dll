@@ -10,7 +10,9 @@
 enum class EEvent_State
 {
 	EES_Hook_Enable,
+	EES_Hook_Disable,
 	EES_Clicker_Handler,
+	EES_Click_Point_Save,
 	EES_Clipboard_Handler,
 	EES_Chunk_List_Record_Start,
 	EES_Chunk_List_Record_Stop,
@@ -24,21 +26,6 @@ public:
 	AEvent_Handler();
 
 	bool Update_State(const EEvent_State event_state, wchar_t **file_name);
-
-	int Init();
-	wchar_t *Handle_Clipboard();
-	void Enable_Hook(const bool is_enable);  // !!!
-	void Get_XY_Cords(int **ptr_x, int **ptr_y);
-	void Reset_Tools();  // !!!
-	int *Temp_Array_Ptr;
-	int *Arra_Cords;
-
-private:
-	void Clicker_Handler();
-	bool FFmpeg_Chank_List_Record(wchar_t **file_name);
-	void FFmpeg_Chank_List_Stop();
-	void Curl_Example();
-
 };
 //------------------------------------------------------------------------------------------------------------
 

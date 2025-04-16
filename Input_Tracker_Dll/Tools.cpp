@@ -43,25 +43,10 @@ static long long CALLBACK Hook_Mouse_Proc(int n_code, WPARAM w_param, LPARAM l_p
    return CallNextHookEx(Hook_Mouse, n_code, w_param, l_param);
 }
 //------------------------------------------------------------------------------------------------------------
-void Mouse_Hook_Enable()
-{
-   constexpr int wh_mouse_ll = 14;
-   if (Hook_Mouse != 0)
-      return;
-   Hook_Mouse = SetWindowsHookEx(wh_mouse_ll, Hook_Mouse_Proc, GetModuleHandleW(0), 0);
-}
-//------------------------------------------------------------------------------------------------------------
-void Mouse_Hook_Remove()
-{
-   if (Hook_Mouse)
-      UnhookWindowsHookEx(Hook_Mouse);
-   Hook_Mouse = 0;
-}
-//------------------------------------------------------------------------------------------------------------
-static size_t WriteCallback(void* contents, size_t size, size_t nmemb, std::string* output)
+static size_t WriteCallback(void *contents, size_t size, size_t nmemb, std::string *output)
 {
    size_t total_size = size * nmemb;
-   output->append((char*)contents, total_size);
+   output->append( (char *)contents, total_size);
    return total_size;
 }
 //------------------------------------------------------------------------------------------------------------
@@ -94,12 +79,27 @@ void AsTools::Throw()
 //------------------------------------------------------------------------------------------------------------
 void AsTools::Hook_Enable()
 {
-   Mouse_Hook_Enable();
+   constexpr int wh_mouse_ll = 14;
+   if (Hook_Mouse != 0)
+      return;
+   Hook_Mouse = SetWindowsHookEx(wh_mouse_ll, Hook_Mouse_Proc, GetModuleHandleW(0), 0);
 }
 //------------------------------------------------------------------------------------------------------------
 void AsTools::Hook_Disable()
 {
-   Mouse_Hook_Remove();
+   delete[] Array_X_Cords;  // !!! Need Check if work good
+   delete[] Array_Y_Cords;
+   Ptr_X_Cords = 0;
+   Ptr_Y_Cords = 0;
+
+   if (Hook_Mouse)
+      UnhookWindowsHookEx(Hook_Mouse);
+   Hook_Mouse = 0;
+}
+//------------------------------------------------------------------------------------------------------------
+void AsTools::Click_Point_Save()
+{
+   const int *click_points_array[] { AsTools::Array_X_Cords, AsTools::Array_Y_Cords };
 }
 //------------------------------------------------------------------------------------------------------------
 bool AsTools::FFmpeg_Chank_List_Record(wchar_t **file_name_result)
@@ -250,14 +250,6 @@ void AsTools::Clicker_Handler()
 
    while (!key_combination(vk_control, 'Q') )  // if holding ctrl + q
       perform_action(1183, 770, inputs, 2, delay_ms);  // Click to sacrifice card and wait delay_ms
-}
-//------------------------------------------------------------------------------------------------------------
-void AsTools::Array_Clear()
-{
-   delete[] Array_X_Cords;
-   delete[] Array_Y_Cords;
-   Ptr_X_Cords = 0;
-   Ptr_Y_Cords = 0;
 }
 //------------------------------------------------------------------------------------------------------------
 wchar_t *AsTools::Handle_Clipboard()

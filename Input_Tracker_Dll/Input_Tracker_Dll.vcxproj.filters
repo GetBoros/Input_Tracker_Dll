@@ -7,6 +7,9 @@
     <Filter Include="Tools">
       <UniqueIdentifier>{2dd17511-3f46-4eb8-b1ee-35693bfceed8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Tools\Pyton">
+      <UniqueIdentifier>{2c341b21-7470-4e7b-b666-c59544385366}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -25,11 +28,11 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="scrape_cards.py">
-      <Filter>Tools</Filter>
-    </None>
     <None Include="parse_card.py">
-      <Filter>Tools</Filter>
+      <Filter>Tools\Pyton</Filter>
+    </None>
+    <None Include="scrape_cards.py">
+      <Filter>Tools\Pyton</Filter>
     </None>
   </ItemGroup>
 </Project>

@@ -17,13 +17,12 @@ public:
 	// TEMP || If last click don`t save cords, or if need save |
 	void Hook_Enable();
 	void Hook_Disable();
+	void Click_Point_Save();
 	bool FFmpeg_Chank_List_Record(wchar_t **file_name_result);
 	void FFmpeg_Chank_List_Stop();
 	void Curl_Examples();  // !!! TASK Login and create coockies | Run tor bundler and receive our IP for feature examples
 
 	void Clicker_Handler();
-
-	static void Array_Clear();
 
 	static constexpr int Array_Length = 5;
 	static int *Ptr_X_Cords;
