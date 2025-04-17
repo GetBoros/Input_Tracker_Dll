@@ -16,6 +16,7 @@ public:
 
 	// TEMP || If last click don`t save cords, or if need save |
 	void Pyton_Run();
+	void Pyton_Run_00();
 	void Hook_Enable();
 	void Hook_Disable();
 	void Click_Point_Save();

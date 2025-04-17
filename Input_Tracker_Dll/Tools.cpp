@@ -1,4 +1,4 @@
-//------------------------------------------------------------------------------------------------------------
+п»ї//------------------------------------------------------------------------------------------------------------
 module;
 #include <Windows.h>
 #include <curl/curl.h>  // !!! Send to other file
@@ -80,32 +80,9 @@ void AsTools::Throw()
 //------------------------------------------------------------------------------------------------------------
 void AsTools::Pyton_Run()
 {
-   FILE *fp = 0;
-   const std::string path = "get_card_users.py";
-   
-   Py_Initialize();
-
-   // 1. Добавляем путь к папке проекта
-   PyRun_SimpleString("import sys");
-   PyRun_SimpleString("sys.path.append(r'C:\\Work\\Projects_CPP20\\Project_Examples\\Input_Tracker_Dll\\Input_Tracker_Dll')");
-
-   // 2. Безопасный запуск файла
-   fopen_s(&fp, path.c_str(), "rb");
-   if (!fp != 0)
-   {
-      Py_Finalize();  // Error: Failed to open file 
-      return;
-   }
-
-   PyRun_SimpleFile(fp, path.c_str() );
-   fclose(fp);
-
-   if (!PyErr_Occurred() != false)
-      PyErr_Print();
-
-   Py_Finalize();
+   int yy = 0;
 }
-//------------------------------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------------------------------------//------------------------------------------------------------------------------------------------------------
 void AsTools::Hook_Enable()
 {
    constexpr int wh_mouse_ll = 14;
@@ -220,25 +197,25 @@ void AsTools::Curl_Examples()
    CURLcode res;
    std::string response_data;
 
-   // Инициализация libcurl
+   // РРЅРёС†РёР°Р»РёР·Р°С†РёСЏ libcurl
    curl = curl_easy_init();
    if (curl)
    {
-      curl_easy_setopt(curl, CURLOPT_URL, "https://api.ipify.org?format=json");   // Устанавливаем URL для проверки IP (используем api.ipify.org)
+      curl_easy_setopt(curl, CURLOPT_URL, "https://api.ipify.org?format=json");   // РЈСЃС‚Р°РЅР°РІР»РёРІР°РµРј URL РґР»СЏ РїСЂРѕРІРµСЂРєРё IP (РёСЃРїРѕР»СЊР·СѓРµРј api.ipify.org)
 
-      // Указываем Tor-прокси (SOCKS5)
+      // РЈРєР°Р·С‹РІР°РµРј Tor-РїСЂРѕРєСЃРё (SOCKS5)
       /*
          // just execute befor
          C:\Tor\Tor\tor.exe
       */
       curl_easy_setopt(curl, CURLOPT_PROXY, "socks5h://127.0.0.1:9050");
       
-      curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteCallback);  // Устанавливаем callback для записи ответа
+      curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteCallback);  // РЈСЃС‚Р°РЅР°РІР»РёРІР°РµРј callback РґР»СЏ Р·Р°РїРёСЃРё РѕС‚РІРµС‚Р°
       curl_easy_setopt(curl, CURLOPT_WRITEDATA, &response_data);
 
-      res = curl_easy_perform(curl);  // Выполняем запрос
+      res = curl_easy_perform(curl);  // Р’С‹РїРѕР»РЅСЏРµРј Р·Р°РїСЂРѕСЃ
 
-      if (res != CURLE_OK)  // Проверяем на ошибки
+      if (res != CURLE_OK)  // РџСЂРѕРІРµСЂСЏРµРј РЅР° РѕС€РёР±РєРё
          yy++;  // error
       else
          response_data;  // receive data

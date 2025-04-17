@@ -40,5 +40,9 @@
     <None Include="get_card_users.py">
       <Filter>Tools\Pyton</Filter>
     </None>
+    <None Include="packages.config" />
+    <None Include="Login.py">
+      <Filter>Tools\Pyton</Filter>
+    </None>
   </ItemGroup>
 </Project>

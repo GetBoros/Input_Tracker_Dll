@@ -6,7 +6,7 @@ from urllib.parse import urljoin  # Добавьте этот импорт
 CONFIG = {
     "COOKIES_FILE": "auth_cookies.json",
     "BASE_URL": "https://asstars.tv",
-    "USER_URL": "/user/Integra_Prime/cards/?rank=e",
+    "USER_URL": "/user/Integra_Prime/cards/?rank=a",
     "OUTPUT_FILE": "card_ids.json",
     "HEADLESS": True,
     "TIMEOUT": 15000
