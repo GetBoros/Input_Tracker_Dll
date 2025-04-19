@@ -114,7 +114,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>
       </PrecompiledHeaderFile>
-      <LanguageStandard>stdcpp23</LanguageStandard>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
       <ScanSourceForModuleDependencies>true</ScanSourceForModuleDependencies>
       <TranslateIncludes>false</TranslateIncludes>
       <EnableModules>true</EnableModules>
@@ -144,7 +144,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>
       </PrecompiledHeaderFile>
-      <LanguageStandard>stdcpp23</LanguageStandard>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
       <ScanSourceForModuleDependencies>true</ScanSourceForModuleDependencies>
       <TranslateIncludes>false</TranslateIncludes>
       <EnableModules>true</EnableModules>
@@ -172,6 +172,8 @@
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
       </PrecompiledHeaderFile>
     </ClCompile>
+    <ClCompile Include="Json_Reader.cpp" />
+    <ClCompile Include="Json_Reader.ixx" />
     <ClCompile Include="Tools.cpp" />
     <ClCompile Include="Tools.ixx" />
   </ItemGroup>
@@ -179,12 +181,7 @@
     <ClInclude Include="dllmain.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="get_card_ids.py" />
-    <None Include="get_card_users.py" />
-    <None Include="Login.py" />
     <None Include="packages.config" />
-    <None Include="parse_card.py" />
-    <None Include="scrape_cards.py" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

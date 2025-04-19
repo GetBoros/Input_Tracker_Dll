@@ -15,7 +15,7 @@ public:
 	void Throw();
 
 	// TEMP || If last click don`t save cords, or if need save |
-	void Pyton_Run();
+	void Read_Json();
 	void Hook_Enable();
 	void Hook_Disable();
 	void Click_Point_Save();

@@ -2,13 +2,14 @@
 module;
 #include <Windows.h>
 #include <curl/curl.h>  // !!! Send to other file
-#include <Python.h>
 module Tools;
 //------------------------------------------------------------------------------------------------------------
 import <Windows.h>;
 import <array>;
 import <thread>;
 import <filesystem>;
+//------------------------------------------------------------------------------------------------------------
+import Json_Reader;
 //------------------------------------------------------------------------------------------------------------
    
 
@@ -77,9 +78,12 @@ void AsTools::Throw()
    return throw 13;
 }
 //------------------------------------------------------------------------------------------------------------
-void AsTools::Pyton_Run()
+void AsTools::Read_Json()
 {
-
+   AJson_Reader json_reader;
+   json_reader.Load_From_File("C:\\ffmpeg\\card_ids.json");
+   const auto test = json_reader.Get_Card_Data();
+   int size_array = test.size();
 }
 //------------------------------------------------------------------------------------------------------------//------------------------------------------------------------------------------------------------------------
 void AsTools::Hook_Enable()

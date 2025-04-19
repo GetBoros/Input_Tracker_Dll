@@ -7,8 +7,8 @@
     <Filter Include="Tools">
       <UniqueIdentifier>{2dd17511-3f46-4eb8-b1ee-35693bfceed8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Tools\Pyton">
-      <UniqueIdentifier>{2c341b21-7470-4e7b-b666-c59544385366}</UniqueIdentifier>
+    <Filter Include="Json">
+      <UniqueIdentifier>{4e53b939-0e7a-464f-adef-7f37c679ebe9}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -21,6 +21,12 @@
     <ClCompile Include="Tools.cpp">
       <Filter>Tools</Filter>
     </ClCompile>
+    <ClCompile Include="Json_Reader.ixx">
+      <Filter>Json</Filter>
+    </ClCompile>
+    <ClCompile Include="Json_Reader.cpp">
+      <Filter>Json</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="dllmain.h">
@@ -28,21 +34,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="parse_card.py">
-      <Filter>Tools\Pyton</Filter>
-    </None>
-    <None Include="scrape_cards.py">
-      <Filter>Tools\Pyton</Filter>
-    </None>
-    <None Include="get_card_ids.py">
-      <Filter>Tools\Pyton</Filter>
-    </None>
-    <None Include="get_card_users.py">
-      <Filter>Tools\Pyton</Filter>
-    </None>
     <None Include="packages.config" />
-    <None Include="Login.py">
-      <Filter>Tools\Pyton</Filter>
-    </None>
   </ItemGroup>
 </Project>
