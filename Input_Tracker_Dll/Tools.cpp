@@ -80,10 +80,20 @@ void AsTools::Throw()
 //------------------------------------------------------------------------------------------------------------
 void AsTools::Read_Json()
 {
+   SCard_Data Card_Data;
    AJson_Reader json_reader;
-   json_reader.Load_From_File("C:\\ffmpeg\\card_ids.json");
-   const auto test = json_reader.Get_Card_Data();
-   int size_array = test.size();
+
+   std::filesystem::path dir_curr = std::filesystem::current_path();
+   std::filesystem::path dir_json = dir_curr / "Json";
+   if(!std::filesystem::exists(dir_json) )
+      return;
+   std::filesystem::path dir_json_file = dir_json / "card_ids.json";
+   if (!std::filesystem::exists(dir_json_file) )
+      return;
+
+   if (!json_reader.Load_From_File(dir_json_file) )
+      return;
+   const std::vector<SCard_Data> &card_array = json_reader.Card_Data_List;
 }
 //------------------------------------------------------------------------------------------------------------//------------------------------------------------------------------------------------------------------------
 void AsTools::Hook_Enable()
