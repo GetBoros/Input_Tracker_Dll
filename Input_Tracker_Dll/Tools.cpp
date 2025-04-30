@@ -95,7 +95,7 @@ void AsTools::Read_Json()
       return;
    const std::vector<SCard_Data> &card_array = json_reader.Card_Data_List;
 }
-//------------------------------------------------------------------------------------------------------------//------------------------------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------------------------------------
 void AsTools::Hook_Enable()
 {
    constexpr int wh_mouse_ll = 14;
@@ -268,7 +268,7 @@ void AsTools::Clicker_Handler()
       };
 
    while (!key_combination(vk_control, 'Q') )  // if holding ctrl + q
-      perform_action(1183, 770, inputs, 2, delay_ms);  // Click to sacrifice card and wait delay_ms
+		perform_action(1183, 770, inputs, 2, delay_ms);  // Click to sacrifice card and wait delay_ms
 }
 //------------------------------------------------------------------------------------------------------------
 wchar_t *AsTools::Handle_Clipboard()
