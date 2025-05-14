@@ -5,6 +5,20 @@ export module Tools;
 //------------------------------------------------------------------------------------------------------------
 export import <sstream>;
 import <Windows.h>;
+import Coroutine;
+//------------------------------------------------------------------------------------------------------------
+class AValueMonitor
+{
+public:
+	void Check_Value_Async(const int* ValuePtr, int Target)
+	{
+		CurrentWaiter = AIntWaiter(ValuePtr, Target);
+		CurrentWaiter.operator co_await();
+	}
+
+private:
+	AIntWaiter CurrentWaiter;
+};
 //------------------------------------------------------------------------------------------------------------
 export class AsTools
 {

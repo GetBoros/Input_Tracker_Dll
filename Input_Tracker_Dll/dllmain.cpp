@@ -58,6 +58,10 @@ bool AEvent_Handler::Update_State(const EEvent_State event_state, wchar_t **file
 		AsTools().Read_Json();
 		break;
 
+	case EEvent_State::EES_Coroutine_Examples:
+		AsTools().Read_Json();
+		break;
+
 	default:
 		AsTools().Throw();
 	}

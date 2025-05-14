@@ -27,6 +27,12 @@
     <ClCompile Include="Json_Reader.cpp">
       <Filter>Json</Filter>
     </ClCompile>
+    <ClCompile Include="Coroutine.ixx">
+      <Filter>Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="Coroutine.cpp">
+      <Filter>Tools</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="dllmain.h">

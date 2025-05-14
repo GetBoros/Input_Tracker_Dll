@@ -166,6 +166,7 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Coroutine.ixx" />
     <ClCompile Include="dllmain.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
       </PrecompiledHeaderFile>
@@ -174,6 +175,7 @@
     </ClCompile>
     <ClCompile Include="Json_Reader.cpp" />
     <ClCompile Include="Json_Reader.ixx" />
+    <ClCompile Include="Coroutine.cpp" />
     <ClCompile Include="Tools.cpp" />
     <ClCompile Include="Tools.ixx" />
   </ItemGroup>
