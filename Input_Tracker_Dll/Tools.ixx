@@ -1,4 +1,4 @@
-//------------------------------------------------------------------------------------------------------------
+﻿//------------------------------------------------------------------------------------------------------------
 module;
 
 export module Tools;
@@ -106,4 +106,71 @@ private:
 	ffplay -user_agent "Boros" "https://edge6-hel.live.mmcdn.com/live-edge/amlst:sincere_shyness-sd-c1f6b213faeaf4d2aca39c22606c277265abb4fae1a8ac2e8c53deca2294dca5_trns_h264/chunklist_w1074660170_b5128000_t64RlBTOjMwLjA=.m3u8"
 
 */
+#pragma endregion
+
+#pragma region SACRIFICE_PACK_CLUB_START
+/*
+(() => {
+  // --- Настройки ---
+  const refreshDelayMs = 50;  // задержка между обновлениями, мс
+  const postDonateDelayMs = 100; // доп. задержка после удачного доната, мс
+
+  // --- Вспомогательные функции ---
+  const log = msg => console.log(`[${new Date().toISOString()}] ${msg}`);
+  const delay = ms => new Promise(res => setTimeout(res, ms));
+
+  function findDonateButton() {
+	 return Array.from(document.querySelectorAll('button'))
+		.find(b => b.textContent.trim().includes('Пожертвовать карту'));
+  }
+  function findRefreshButton() {
+	 return document.querySelector('.club__boost__refresh-btn');
+  }
+
+  // --- Контроль выполнения ---
+  let stopped = false;
+  window.stopDonations = () => {
+	 stopped = true;
+	 log('Скрипт остановлен пользователем');
+  };
+
+  // --- Основной асинхронный цикл ---
+  async function donateLoop() {
+	 log('Старт бесконечного цикла донатов');
+	 while (!stopped) {
+		const donateBtn = findDonateButton();
+		if (donateBtn) {
+		  donateBtn.click();
+		  log('✔  Донат совершён');
+		  // ждём, пока сайт обновит карту
+		  await delay(postDonateDelayMs);
+		  continue; // сразу пробуем донатить новую карту
+		}
+
+		const refreshBtn = findRefreshButton();
+		if (refreshBtn) {
+		  refreshBtn.click();
+		  log('↻  Обновил задание');
+		} else {
+		  log('⚠️  Кнопка «Обновить» не найдена');
+		}
+
+		// ждём перед следующей попыткой
+		await delay(refreshDelayMs);
+	 }
+  }
+
+  // --- Запуск ---
+  donateLoop();
+  log(`Используй window.stopDonations() чтобы остановить цикл`);
+})();
+
+*/
+
+// SACRIFICE PACK CLUB END
+/**
+window.stopDonations();
+
+ */
+
 #pragma endregion
