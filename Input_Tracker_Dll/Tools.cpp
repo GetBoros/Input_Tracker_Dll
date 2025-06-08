@@ -267,9 +267,8 @@ void AsTools::Clicker_Handler()
          return (GetAsyncKeyState(modifer) & 0x8000) && (GetAsyncKeyState(key) & 0x8000);
       };
 
-   while (!key_combination(vk_control, 'Q') )  // if holding ctrl + q
-		perform_action(1101, 770, inputs, 2, 100);  // Click to sacrifice card and wait delay_ms || 326 727
-	//perform_action(215, 715, inputs, 2, delay_ms / 2);  // Click to sacrifice card and wait delay_ms || 480 715
+   while (key_combination(vk_control, 'Q') != true)  // if holding ctrl + q
+		perform_action(1101, 770, inputs, 2, delay_ms);  // Click to sacrifice card and wait delay_ms || 215, 715
 }
 //------------------------------------------------------------------------------------------------------------
 wchar_t *AsTools::Handle_Clipboard()
