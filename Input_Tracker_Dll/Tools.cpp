@@ -8,6 +8,8 @@ import <Windows.h>;
 import <array>;
 import <thread>;
 import <filesystem>;
+import <regex>;
+import <optional>;
 //------------------------------------------------------------------------------------------------------------
 import Json_Reader;
 //------------------------------------------------------------------------------------------------------------
@@ -121,6 +123,75 @@ void AsTools::Click_Point_Save()
    const int *click_points_array[] { AsTools::Array_X_Cords, AsTools::Array_Y_Cords };
 }
 //------------------------------------------------------------------------------------------------------------
+std::optional<bool> AsTools::Compare_Images_Ssim(std::wstring_view old_file, std::wstring_view new_file, double threshold)
+{
+    SECURITY_ATTRIBUTES sa { sizeof(sa), 0, true };
+    HANDLE pipe_read = 0, pipe_write = 0;
+    if (!CreatePipe(&pipe_read, &pipe_write, &sa, 0) )
+        return std::nullopt;
+
+    STARTUPINFOW si { sizeof(si) };
+    si.dwFlags    = STARTF_USESHOWWINDOW | STARTF_USESTDHANDLES;
+    si.wShowWindow = SW_HIDE;
+    si.hStdOutput = pipe_write;
+    si.hStdError  = pipe_write;
+
+    // Строим команду FFmpeg
+    std::wstring cmd =
+        LR"(ffmpeg -i ")" + std::wstring(old_file) +
+        LR"(" -i ")" + std::wstring(new_file) +
+        LR"(" -lavfi ssim="stats_file=-" -f null -)";
+
+    // Копируем в изменяемый буфер
+    std::array<wchar_t, 512> cmd_buf { };
+    wcsncpy_s(cmd_buf.data(), cmd_buf.size(), cmd.c_str(), _TRUNCATE);
+
+    PROCESS_INFORMATION pi { };
+    bool ok = CreateProcessW(0, cmd_buf.data(), 0, 0, TRUE, CREATE_NO_WINDOW, 0, 0, &si, &pi);
+    
+    // Закрываем ненужные дескрипторы
+    CloseHandle(pipe_write);
+    if (ok != true)
+    {
+        CloseHandle(pipe_read);
+        return std::nullopt;
+    }
+    CloseHandle(pi.hThread);
+
+    // Читаем весь вывод FFmpeg
+    std::string output;
+    {
+        constexpr DWORD buf_size = 256;
+        std::array<char, buf_size> buffer { };
+        DWORD bytes_read = 0;
+        while (ReadFile(pipe_read, buffer.data(), buf_size - 1, &bytes_read, 0) && bytes_read > 0)
+        {
+            output.append(buffer.data(), bytes_read);
+        }
+    }
+    CloseHandle(pipe_read);
+
+    // Дождаться завершения FFmpeg
+    WaitForSingleObject(pi.hProcess, INFINITE);
+    CloseHandle(pi.hProcess);
+
+    // Ищем значение All:<число>
+    std::smatch m;
+    static const std::regex re_all(R"(All:([0-9]*\.[0-9]+))");
+    if (std::regex_search(output, m, re_all) && m.size() > 1)
+    {
+        double all_val = std::stod(m.str(1));
+        return all_val >= threshold;
+    }
+
+    return std::nullopt;
+}
+//------------------------------------------------------------------------------------------------------------
+void AsTools::FFmpeg_Make_Screen_Shot()
+{
+
+}
+//------------------------------------------------------------------------------------------------------------
 bool AsTools::FFmpeg_Chank_List_Record(wchar_t **file_name_result)
 {
    wchar_t *text_chank_lists = 0;
@@ -136,6 +207,14 @@ bool AsTools::FFmpeg_Chank_List_Record(wchar_t **file_name_result)
    constexpr int sw_hide = 0;
    constexpr int std_output_handle = ( (DWORD) - 11);  // STD_OUTPUT_HANDLE
    constexpr int std_error_handle = ( (DWORD) - 12);  // STD_ERROR_HANDLE
+
+   // !!! TEST
+   auto result = Compare_Images_Ssim(
+      L"C:\\Program Files\\Programs\\Folders\\GUI_ASaver_Release 1.0.0. 773.5 bytes\\main.jpg",
+      L"C:\\Program Files\\Programs\\Folders\\GUI_ASaver_Release 1.0.0. 773.5 bytes\\second.jpg"
+   );
+   return static_cast<bool>(result);
+   // !!! TEST END
 
    text_chank_lists = Handle_Clipboard();
    Get_File_Unique_Name(text_chank_lists, file_name);
@@ -241,7 +320,7 @@ void AsTools::Curl_Examples()
 //------------------------------------------------------------------------------------------------------------
 void AsTools::Clicker_Handler()
 {
-   constexpr int delay_ms = 150;  // give site time to response next 150 ms or less? || ( 8 card 150 ) ( 3 card 100)
+   constexpr int delay_ms = 250;  // give site time to response next 150 ms or less? || ( 8 card 150 ) ( 3 card 100)
    constexpr int input_mouse = 0;
    constexpr int mouse_eventf_leftdown = 0x0002;
    constexpr int mouse_eventf_leftup = 0x0004;
@@ -269,8 +348,8 @@ void AsTools::Clicker_Handler()
 
    while (key_combination(vk_control, 'Q') != true)  // if holding ctrl + q
 	{
-		perform_action(1101, 770, inputs, 2, 75);  // Click to sacrifice card and wait delay_ms || 215, 715
-		perform_action(1101, 770, inputs, 2, 110);  // Click to sacrifice card and wait delay_ms || 215, 715
+		perform_action(1101, 770, inputs, 2, 50);  // Click to sacrifice card and wait delay_ms || 215, 715
+		perform_action(1101, 770, inputs, 2, 100);  // Click to sacrifice card and wait delay_ms || 215, 715
 	}
 }
 //------------------------------------------------------------------------------------------------------------

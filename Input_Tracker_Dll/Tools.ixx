@@ -5,6 +5,9 @@ export module Tools;
 //------------------------------------------------------------------------------------------------------------
 export import <sstream>;
 import <Windows.h>;
+import <filesystem>;
+import <regex>;
+import <optional>;
 import Coroutine;
 //------------------------------------------------------------------------------------------------------------
 class AValueMonitor
@@ -33,6 +36,10 @@ public:
 	void Hook_Enable();
 	void Hook_Disable();
 	void Click_Point_Save();
+
+	std::optional<bool> Compare_Images_Ssim(std::wstring_view old_file, std::wstring_view new_file, double threshold = 0.95);
+	void FFmpeg_Make_Screen_Shot();
+
 	bool FFmpeg_Chank_List_Record(wchar_t **file_name_result);
 	void FFmpeg_Chank_List_Stop();
 	void Curl_Examples();  // !!! TASK Login and create coockies | Run tor bundler and receive our IP for feature examples
